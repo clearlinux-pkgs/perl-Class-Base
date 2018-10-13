@@ -4,13 +4,14 @@
 #
 Name     : perl-Class-Base
 Version  : 0.09
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/Y/YA/YANICK/Class-Base-0.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Y/YA/YANICK/Class-Base-0.09.tar.gz
 Summary  : 'useful base class for deriving other modules '
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
-Requires: perl-Class-Base-man
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-Class-Base-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Clone)
 
 %description
@@ -20,12 +21,21 @@ SYNOPSIS
 package My::Funky::Module;
 use base qw( Class::Base );
 
-%package man
-Summary: man components for the perl-Class-Base package.
+%package dev
+Summary: dev components for the perl-Class-Base package.
+Group: Development
+Provides: perl-Class-Base-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Class-Base package.
+
+
+%package license
+Summary: license components for the perl-Class-Base package.
 Group: Default
 
-%description man
-man components for the perl-Class-Base package.
+%description license
+license components for the perl-Class-Base package.
 
 
 %prep
@@ -53,10 +63,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Class-Base
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Class-Base/LICENSE
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -65,8 +77,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Class/Base.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Class/Base.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Class::Base.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Class-Base/LICENSE
