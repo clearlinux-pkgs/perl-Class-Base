@@ -4,7 +4,7 @@
 #
 Name     : perl-Class-Base
 Version  : 0.09
-Release  : 4
+Release  : 5
 URL      : https://cpan.metacpan.org/authors/id/Y/YA/YANICK/Class-Base-0.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Y/YA/YANICK/Class-Base-0.09.tar.gz
 Summary  : 'useful base class for deriving other modules '
@@ -77,7 +77,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.26.1/Class/Base.pm
+/usr/lib/perl5/vendor_perl/5.28.0/Class/Base.pm
 
 %files dev
 %defattr(-,root,root,-)
