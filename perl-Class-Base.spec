@@ -7,7 +7,7 @@
 #
 Name     : perl-Class-Base
 Version  : 0.09
-Release  : 33
+Release  : 34
 URL      : https://cpan.metacpan.org/authors/id/Y/YA/YANICK/Class-Base-0.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Y/YA/YANICK/Class-Base-0.09.tar.gz
 Summary  : 'useful base class for deriving other modules '
